@@ -1,0 +1,45 @@
+.formba {
+    text-align: center;
+    color: black;
+    
+} 
+
+.columnat {
+    border-bottom: 1px solid #96ac3c;
+    text-align: center;
+    color: #000;
+}
+#contenido{
+margin-top:14px;
+}
+.resBus{
+margin-top: 20px;
+text-transform: uppercase;
+color: #d33;
+text-align: center;
+}
+#contenedor{
+  width:1000px;
+ /* height:500px;*/
+  margin:auto;
+  background-color:#1a1b1c;
+  border-top: 4px solid #96ac3c;
+}
+.columnat
+{
+border-bottom: 1px solid #96ac3c;
+text-align: center;
+}
+#login{
+  width: 440px;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  background: #fff;
+  padding: 30px;
+  border: 10px solid #f2f2f2;
+  text-align: center;
+}
+.input{
+margin:5px;
+}
