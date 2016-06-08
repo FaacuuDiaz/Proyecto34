@@ -69,12 +69,7 @@
 							<label>Imagen: </label>
 							</br>
 							<?php
-								require_once('connection.php'); 
-								$con=connection();
-								$result = mysqli_query($con,"Select premium from usuario where id_usuario = $hospedaje[9]");	
-								$f = $result->fetch_row() ;
-								if(!empty($f[0]))
-								{
+								
 									if($hospedaje[3]==null)
 									{?>
 									<img src="img/foto.png"style="width:340px; height:255px;"/>
@@ -85,12 +80,8 @@
 										<img src="mostrarImagen.php?id=<?php echo $hospedaje[0];?>"class="property_img"style="width:340px; height:255px;"/>
 									<?php 
 									}
-								}
-								else
-								{?>
-									<img src="img/foto.png"style="width:340px; height:255px;"/>
-								<?php
-								}
+								
+								
 								//mysqli_close($con);
 								
 						}
@@ -149,15 +140,22 @@
 				
 					$cont= connection();
 					$id_usuario=$_SESSION['id_usuario'];
-					$consulta = "SELECT * from solicitudes where id_usuario = $id_usuario and id_hospedaje = $id_hospedaje";
+					$consulta = "SELECT * from solicitudes inner join hospedaje on solicitudes.id_hospedaje = hospedaje.id_hospedaje
+					where hospedaje.idusuario = $id_usuario and solicitudes.id_hospedaje = $id_hospedaje";
 					if ($resultado = mysqli_query($cont, $consulta))
 					{
 						$r=$resultado->fetch_assoc();
 						if($r!=0)
 						{ ?>
+					 
+					<form action="verReservas.php" method="post">
 							<div class="more_listing">
-								<a href="#" class="more_listing_btn">Ver reservas</a>
+								<input style="visibility:hidden" name="id" value="<?php echo $id_hospedaje; ?>" />
+								</br>
+								<input value="ver reservas" type="submit" class="more_listing_btn" style="background-color: white;" />
+							<!--	<a  type= "submit" href="#" class="more_listing_btn">Ver reservas</a> -->
 							</div>
+							</form>
 						<?php	
 						}
 					}

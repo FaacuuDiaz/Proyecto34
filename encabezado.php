@@ -13,25 +13,43 @@
 					session_start();
 				}
 				
-				if(isset($_SESSION['usuario'])) {
-							$user=$_SESSION['usuario'];
-							$nick = $_SESSION['nick'];
-							$id = $_SESSION['id_usuario'];
-				?>					
-				
-				<a class="login_btn"  href="cerrar_sesion.php"> Cerrar sesion </a> 
-				<a class="login_btn"  href="formulario.php?edit=true&var=1"> Editar perfil </a> 
-
-						
-				<?php
-				echo "Bienvenido ".$_SESSION['nick']."!";
+				if(isset($_SESSION['usuario']))
+				{
+					$user=$_SESSION['usuario'];
+					$nick = $_SESSION['nick'];
+					$id = $_SESSION['id_usuario'];
+					?>
+					<a class="login_btn"  href="cerrar_sesion.php"> Cerrar sesion </a> 
+					<a class="login_btn"  href="formulario.php?edit=true&var=1"> Editar perfil </a> 
+					<a class="login_btn"  style="padding: 3px 16px 3px 3px; margin: 15px 0 0 0px;background: #ffffff;color: #1c3655;">
+						<?php
+						$con=connection();
+						$result = mysqli_query($con,"Select * from usuario where id_usuario = $id");	
+						$fila = mysqli_fetch_assoc($result);
+						if(!empty($fila['foto']))
+						{ 	?>
+							<img src="mostrarFotoUser.php?id=<?php echo $id;?>"class="property_img"style="width:60px; height:60px;"/>
+							<?php 
+						}
+						else
+						{ 	?>
+							<img src="img/perfil.png"style="width:60px; height:60px;"/>
+							<?php
+						}
+						mysqli_close($con);
+						?>
+						<span>
+							<?php echo "Bienvenido ".$_SESSION['nick']."!"; ?>
+						</span>
+					</a> 
+					<?php 
 				}
-				else{ ?>
-					
+				else
+				{ ?>
 					<a href="formulario.php?var=2" class="login_btn">Iniciar sesion</a>
 					<a href="formulario.php?var=3" class="login_btn">Registrarme</a>
-				
-				<?php  } ?>
+					<?php
+				} ?>
 				</nav>
 			</div>
 		</header>
@@ -40,65 +58,6 @@
 		if(isset($_SESSION['usuario'])) {			?>							
 	<section class="hero" style="background-color: #96ac3c;">
 		<header>
-		<style>
-		ul#menu {
-    font-family: "lato-regular", Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    letter-spacing: 1px;
- width: 1085px;
- float:left;
- padding: 5px;
-}
-  
-ul#menu li {
- color: #fff;
- float: left;
- list-style: none;
- margin: 0% 2%;
-}
-  
-ul#menu li:hover{
- color: #aaa073;
- cursor:pointer;
-}
-  
-ul#menu ul {
- display: none;
- position: absolute;
- top: 49px;
- background: #96ac3c;
- color: #fff;
- padding: 5px 0px 5px 5px;
- margin: 0;
- }
-  
-ul#menu ul li{
- float: left;
- color: #96ac3c;
- width:100%;
- margin:2% 0%;
-}
- 
- 
-ul#menu ul li a{
- color: #fff;
-}
-  
-ul#menu ul li a:hover{
- color: black;
- cursor:pointer;
-}
-  
-ul#menu li:hover ul ul,ul#menu li:hover ul ul ul,ul#menu li.iehover ul ul,ul#menu li.iehover ul ul ul {
- display: none;
- cursor:pointer;
-}
-  
-ul#menu li:hover ul,ul#menu ul li:hover ul,ul#menu ul ul li:hover ul,ul#menu li.iehover ul,ul#menu ul li.iehover ul,ul#menu ul ul li.iehover ul {
- display: block;
- cursor:pointer;
-}
-		</style>
 			<div class="wrapper">
 					<nav>
 					
