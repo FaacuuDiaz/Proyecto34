@@ -6,7 +6,7 @@
 ?>
 
 	<?php
-		include("connection.php");
+		include_once ("connection.php");
 		$link= connection();
 		$u=$_SESSION['id_usuario'];
 		$consulta= "SELECT * from usuario where id_usuario='".$u."' ";
@@ -31,7 +31,7 @@
 						<p>Foto de perfil (opcional) <input class="imagen" type="file" name ="img" id="img" /></p>
 				<?php if($fila['foto']!=null)
 				{?>
-					<img src="mostarFotoUser.php?id=<?php echo $fila['id_usuario']; ?>" class="property_img"style="width:340px; height:255px;"/>
+					<img src="mostrarFotoUser.php?id=<?php echo $fila['id_usuario']; ?>" class="property_img"style="width:340px; height:255px;"/>
 
 				<?php 
 				} ?>

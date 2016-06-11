@@ -1,4 +1,4 @@
-<?php include("comprobarSesionActiva.php");
+<?php include_once("comprobarSesionActiva.php");
     $csa=new ComprobarSesionActiva();
 	$csa->ComprobarSesion();
 	?>

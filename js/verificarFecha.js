@@ -15,6 +15,5 @@ function validarFecha() {
         else if(fechaDesde<hoy){alert("La fecha desde es menor a la fecha actual!!"); return false;}
 		else if(fechaHasta<hoy){alert("La fecha hasta es menor a la fecha actual!!"); return false;}
 		else if(fechaHasta<fechaDesde){alert("La fecha hasta es menor a la fecha desde!!"); return false;}
-			
-			else{return true;}
+		else{return true;}
 		}

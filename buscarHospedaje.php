@@ -11,23 +11,25 @@ if((isset($_POST['buscar'])||(!isset($_POST['fechaDesde']))||(!isset($_POST['fec
 	
 if(($buscar!="null")&&($fechaDesde=="null")&&($fechaHasta=="null"))  	 
 {
+	echo "texto";
 	$buscar=$_POST['buscar'];
 	require ('connection.php');
 	$cont= connection();
 	$consulta = "SELECT * from hospedaje where estado='habilitado' and (titulo  like '%$buscar%' or 
-																					cant_perso >= '$buscar' or
-																					ciudad like '%$buscar%' or
-																					descripcion like '%$buscar%' or 
-																					ciudad like '%$buscar%')";
+																	
+																		ciudad like '%$buscar%' or
+																		descripcion like '%$buscar%' or 
+																		ciudad like '%$buscar%')";
 	$resultado = mysqli_query($cont, $consulta);
 	return $resultado;
 }
 else if(($buscar!="")&&($fechaDesde!="null")&&($fechaHasta!="null"))  	 
 {
+	echo "todo";
 	require ('connection.php');
 	$cont= connection();
 	$consulta = "SELECT * from hospedaje where estado='habilitado' and (titulo  like '%$buscar%' or 
-																					cant_perso <= '$buscar' or
+																					cant_perso >= '$buscar' or
 																					ciudad like '%$buscar%' or
 																					descripcion like '%$buscar%' or 
 																					ciudad like '%$buscar%') AND h.id_hospedaje not in 
@@ -42,6 +44,7 @@ else if(($buscar!="")&&($fechaDesde!="null")&&($fechaHasta!="null"))
 }
 else if(($buscar=="")&&($fechaDesde!="null")&&($fechaHasta!="null"))  	 
 {
+	echo "fecha";
 	$fechaDesde=$_POST['fechaDesde'];
 	$fechaHasta=$_POST['fechaHasta'];
 	require ('connection.php');

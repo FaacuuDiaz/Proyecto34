@@ -27,7 +27,7 @@
 			<select name="tipos" required style="width: 44.5%;">
 			<option value="">Seleccione un tipo de couch</option>
 			<?php 
-				require ('connection.php');
+				require_once ('connection.php');
 				$cont= connection();
 				$consulta = "SELECT * from tipo_hospedaje where estado='habilitado'";
 				if ($resultado = mysqli_query($cont, $consulta))

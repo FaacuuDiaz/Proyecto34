@@ -11,7 +11,7 @@
 	
 		<ul class="properties_list">
 				<?php
-				require ('connection.php');
+				include_once ('connection.php');
 				$cont= connection();
 				$consulta = "SELECT * from hospedaje where estado='habilitado'";
 				if ($resultado = mysqli_query($cont, $consulta))
