@@ -9,7 +9,8 @@
 		<br>
 			<div class="columnat">DETALLE DEL COUCH</div>
 			
-			<?php require ('connection.php');
+			<?php
+//			require ('connection.php');
 			$cont= connection();
 			$consulta = "SELECT * from hospedaje where estado='habilitado'";
 			if ($resultado = mysqli_query($cont, $consulta))
