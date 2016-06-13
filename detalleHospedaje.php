@@ -10,7 +10,7 @@
 			<div class="columnat">DETALLE DEL COUCH</div>
 			
 			<?php
-//			require ('connection.php');
+			require_once ('connection.php');
 			$cont= connection();
 			$consulta = "SELECT * from hospedaje where estado='habilitado'";
 			if ($resultado = mysqli_query($cont, $consulta))
@@ -93,8 +93,12 @@
 				
 				</br>
 		
-			
+			</br>
+			</br>
 		<div>PROMEDIO: </div>
+		<link rel="stylesheet" type="text/css" href="css/star_rating.css">
+				
+		<ul class="stars stars-32" data-value="4.5" data-votes="1866" data-id="3">
 		<?php
 				//require ('connection.php');
 				$cont= connection();
@@ -105,14 +109,35 @@
 				where hospedaje.id_hospedaje = $id_hospedaje";
 				if ($resultado = mysqli_query($cont, $consulta))
 					{
-						while ($fila = mysqli_fetch_row($resultado)) 
+						if ($fila = mysqli_fetch_row($resultado)) 
 						{ 
-							echo $fila[0];
 							
+							$r=$fila[0];
+							if($r==null)
+							{
+								?>
+								<li data-vote="1" style="background-position: 0px 0px;">1</li>
+								<?php
+							}
+							for ($i = 1; $i <= $r; $i++) 
+							{
+								?>
+								<li data-vote="1" style="background-position: 0px -27px;">1</li>
+								<?php
+							}
+							$resto=fmod ($r,1);
+							if(($resto>0)&&($resto<1))
+							{ 	?>
+								<li data-vote="2" style="background-position: 0px -27px;width:13px;">2</li>
+								<?php
+							} 
 						}
 					}
 				?>
-		
+		</ul>
+		</br>
+		</br>
+		</br>
 		<div class="columnat">PREGUNTAS</div>
 		<div>
 		

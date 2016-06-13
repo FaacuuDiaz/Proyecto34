@@ -1,0 +1,19 @@
+h2{margin:0}
+hr{clear:both;margin:50px 0}
+
+.stars{list-style:none;position:relative;margin:0;padding:0}
+	.voted{cursor:default !important}
+	.stars-32{width:280px}
+	
+	.stars:hover div{display:none}
+	.ul_voted:hover div{display:block !important}
+	
+	.stars li {display:block;float:left;background-repeat:no-repeat;cursor:pointer;text-indent:-9999em;margin:0;padding:0;}
+		
+		.stars-32 li{background-image:url(../img/stars-32.png);width:28px;height:27px;background-position:0 -27px}
+			.stars-32 li:hover{width:28px;height:27px;background-position:0 -27px}
+			
+	.stars div{display:block;background-repeat:repeat-x;position:absolute;left:0;top:0;z-index:102}
+		.votes-32{background-image:url(../img/stars-32.png);background-position:0 -27px;height:27px}
+		
+	.stars span{float:left;font-size:11px;padding:2px 0 0 0;text-align:center;font-family:sans-serif;width:100%}
