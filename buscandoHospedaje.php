@@ -9,16 +9,28 @@
 	include("head.php");
 	include("encabezado.php");
 	?>
-
+<script type="text/javascript" src="js/verificarFecha.js"></script>
 	<section class="listings">
 		<div class="wrapper">
-		<br>
 			<div class="columnat">BUSQUEDA DE COUCH</div>
 			</br>
-	<form name="form1" action="buscarHospedaje.php" method="post">
-	
-	<input name="buscar" class="buscarFiltro" type="text">
-	<input class="buscarFiltro" type="submit"  value="Buscar">
+				<form name="form1" action="buscarHospedaje.php" method="post" onsubmit="return validarFecha()">
+				<?php if(isset($_POST['buscar']))
+						{$buscar=$_POST['buscar'];}
+					?>
+				<input name="buscar" class="buscarFiltro" type="text" value="<?php if(isset($_POST['buscar']))
+						{ echo $_POST['buscar'];}
+					?>">
+				<input name="fechaDesde" id="fechaDesde" class="buscarFiltro" type="date"value="<?php if(isset($_POST['fechaDesde']))
+						{ echo $_POST['fechaDesde'];}
+					?>">
+				<input name="fechaHasta" id="fechaHasta" class="buscarFiltro" type="date"value="<?php if(isset($_POST['fechaHasta']))
+						{ echo $_POST['fechaHasta'];}
+					?>">
+				
+				
+				
+				<input class="buscarFiltro" type="submit"  value="Buscar">
 	
 	</form>
 	</br>

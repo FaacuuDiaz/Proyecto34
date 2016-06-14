@@ -16,7 +16,7 @@
                         
                         header("Location: /");
 					}else{
-						throw new Exception('La contraseña ingresada es incorrecta.');
+						throw new Exception('La contrase\u00f1a ingresada es incorrecta.');
                     }
 				}else{
 					throw new Exception('El usuario ingresado es incorrecto.');

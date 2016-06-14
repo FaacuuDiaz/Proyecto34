@@ -8,8 +8,9 @@
 		
 		<br>
 			<div class="columnat">DETALLE DEL COUCH</div>
-			
-			<?php require ('connection.php');
+
+			<?php
+			require_once ('connection.php');
 			$cont= connection();
 			$consulta = "SELECT * from hospedaje where estado='habilitado'";
 			if ($resultado = mysqli_query($cont, $consulta))
@@ -80,8 +81,26 @@
 										<img src="mostrarImagen.php?id=<?php echo $hospedaje[0];?>"class="property_img"style="width:340px; height:255px;"/>
 									<?php 
 									}
-								
-								
+									echo '</br></br></br>';
+							$link = connection();
+							$id_h = $_GET['id'];
+							$id_u = $_SESSION['id_usuario'];
+							$consulta = "SELECT idusuario FROM hospedaje WHERE id_hospedaje='$id_h' ";
+							$result = mysqli_query($link,$consulta);
+							$aux = mysqli_fetch_array($result);
+							$consulta2 = "SELECT * FROM  solicitudes WHERE id_usuario='$id_u' and id_hospedaje='$id_h'";
+							$r= mysqli_query($link,$consulta2);
+							$aux2 = mysqli_fetch_array($r);
+					
+							if($aux['idusuario']== $id_u)
+								echo	"<a  class='btn_soli'  href=verSolicitudes.php> Ver solicitudes </a>";
+							else 
+								if(mysqli_num_rows($r) ==0 || $aux2['estado']=='rechazada'){
+									echo    "<a  class='btn_soli'  href=mandarSolicitud.php?idh=$id_h&idu=$id_u> Enviar solicitud </a>";
+								}
+								else{
+									echo "Ya enviaste una solicitud por este hospedaje, el estado de la solicitud es: ".$aux2['estado'] ;
+									}													
 								//mysqli_close($con);
 								
 						}
@@ -92,8 +111,17 @@
 				
 				</br>
 		
-			
-		<div>PROMEDIO: </div>
+			</br>
+			</br>
+
+
+
+		 </div>
+
+		<div class="solicitudes">PROMEDIO: 
+		<link rel="stylesheet" type="text/css" href="css/star_rating.css">
+				
+		<ul class="stars stars-32" data-value="4.5" data-votes="1866" data-id="3">
 		<?php
 				//require ('connection.php');
 				$cont= connection();
@@ -104,14 +132,36 @@
 				where hospedaje.id_hospedaje = $id_hospedaje";
 				if ($resultado = mysqli_query($cont, $consulta))
 					{
-						while ($fila = mysqli_fetch_row($resultado)) 
+						if ($fila = mysqli_fetch_row($resultado)) 
 						{ 
-							echo $fila[0];
 							
+							$r=$fila[0];
+							if($r==null)
+							{
+								?>
+								<li data-vote="1" style="background-position: 0px 0px;">1</li>
+								<?php
+							}
+							for ($i = 1; $i <= $r; $i++) 
+							{
+								?>
+								<li data-vote="1" style="background-position: 0px -27px;">1</li>
+								<?php
+							}
+							$resto=fmod ($r,1);
+							if(($resto>0)&&($resto<1))
+							{ 	?>
+								<li data-vote="2" style="background-position: 0px -27px;width:13px;">2</li>
+								<?php
+							} 
 						}
 					}
 				?>
-		
+		</ul>
+		</br>
+		</br>
+		</br>
+		</div>
 		<div class="columnat">PREGUNTAS</div>
 		<div>
 		

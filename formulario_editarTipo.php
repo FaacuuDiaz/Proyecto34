@@ -5,7 +5,7 @@ include("comprobarSesionActiva.php");
 	$csa->ComprobarSesion();
 
 $id_tipo = $_GET['id_tipo'];
-include("connection.php");
+include_once("connection.php");
 $con=connection();
 $consulta = "SELECT * FROM tipo_hospedaje WHERE id_tipo='$id_tipo'";
 $resul=mysqli_query($con,$consulta);
