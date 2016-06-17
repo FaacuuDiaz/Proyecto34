@@ -8,7 +8,11 @@
 		
 		<br>
 			<div class="columnat">DETALLE DEL COUCH</div>
+<<<<<<< HEAD
 			
+=======
+
+>>>>>>> origin/master
 			<?php
 			require_once ('connection.php');
 			$cont= connection();
@@ -81,8 +85,26 @@
 										<img src="mostrarImagen.php?id=<?php echo $hospedaje[0];?>"class="property_img"style="width:340px; height:255px;"/>
 									<?php 
 									}
-								
-								
+									echo '</br></br></br>';
+							$link = connection();
+							$id_h = $_GET['id'];
+							$id_u = $_SESSION['id_usuario'];
+							$consulta = "SELECT idusuario FROM hospedaje WHERE id_hospedaje='$id_h' ";
+							$result = mysqli_query($link,$consulta);
+							$aux = mysqli_fetch_array($result);
+							$consulta2 = "SELECT * FROM  solicitudes WHERE id_usuario='$id_u' and id_hospedaje='$id_h'";
+							$r= mysqli_query($link,$consulta2);
+							$aux2 = mysqli_fetch_array($r);
+					
+							if($aux['idusuario']== $id_u)
+								echo	"<a  class='btn_soli'  href=verSolicitudes.php> Ver solicitudes </a>";
+							else 
+								if(mysqli_num_rows($r) ==0 || $aux2['estado']=='rechazada'){
+									echo    "<a  class='btn_soli'  href=mandarSolicitud.php?idh=$id_h&idu=$id_u> Enviar solicitud </a>";
+								}
+								else{
+									echo "Ya enviaste una solicitud por este hospedaje, el estado de la solicitud es: ".$aux2['estado'] ;
+									}													
 								//mysqli_close($con);
 								
 						}
@@ -95,7 +117,16 @@
 		
 			</br>
 			</br>
+<<<<<<< HEAD
 		<div>PROMEDIO: </div>
+=======
+
+
+
+		 </div>
+
+		<div class="solicitudes">PROMEDIO: 
+>>>>>>> origin/master
 		<link rel="stylesheet" type="text/css" href="css/star_rating.css">
 				
 		<ul class="stars stars-32" data-value="4.5" data-votes="1866" data-id="3">
@@ -138,6 +169,10 @@
 		</br>
 		</br>
 		</br>
+<<<<<<< HEAD
+=======
+		</div>
+>>>>>>> origin/master
 		<div class="columnat">PREGUNTAS</div>
 		<div>
 		

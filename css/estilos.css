@@ -1,3 +1,14 @@
+.btn_soli{
+	text-decoration: none;
+    color: #ffffff;
+    background: #96ac3c;
+    font-family: "lato-regular", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+    padding:1%;
+    margin:1%;
+}
+
 .div_formulario{
 	width: 60%;
 	opacity: 0.65;
@@ -82,7 +93,13 @@
 	text-align: right;
 	
 }
+.formulario textarea{
+padding:1%;
+	margin:1%;
+	width:80%;
+	height: 5%;
 
+}
 .formulario input{
 	padding:1%;
 	margin:1%;
