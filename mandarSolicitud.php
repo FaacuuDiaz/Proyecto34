@@ -5,12 +5,17 @@
 
 <section class="div_formulario" id="formulario_usuario" action="mandandoSolicitud.php">
 		<form class="formulario" method="POST" action="mandandoSolicitud.php">
-			 <input type="hidden" name="idh" value="<?php echo $_GET['idh']; ?> "/>
-			  <input type="hidden" name="idu" value="<?php echo $_GET['idu']; ?> "/>
+			<div class="columnat">ENVIAR SOLICITUD</div>
+		</br>
+			 <input type="hidden" name="idh" value="<?php echo $_POST['idh']; ?> "/>
+			  <input type="hidden" name="idu" value="<?php echo $_POST['idu']; ?> "/>
 			Ingrese fecha desde: <input type="date" name="fechaD" required min="<?php echo date('Y-m-d')?>" /> &nbsp
-			Ingrese fecha hasta: <input type="date" name="fechaH"/> </br></br>
+			</br>
+			Ingrese fecha hasta: <input type="date" name="fechaH" required/> </br></br>
 			<textarea placeholder="Escriba una breve descripcion de la solicitud..." name="mensaje" id="mensaje" rows="3" cols="40"></textarea></br></br>
-			<input type="submit" value="Enviar solicitud" />
+			<p><button type="submit" name="listo" >Enviar Solicitud</button></p>
+			<a href="index.php"><button type="button" name="cancelar" > Cancelar </button></a>
+			
 		</form>
 </section>
 	

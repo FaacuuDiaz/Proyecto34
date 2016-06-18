@@ -12,20 +12,50 @@ if (($_GET['id']) > 0)
 $id= $_GET['id'];
 
 $conn= connection();
-$sql = "DELETE FROM hospedaje WHERE id_hospedaje = '$id'";
+$consulta = "SELECT * from solicitudes where id_hospedaje='$id'";
+if ($resultado = mysqli_query($conn, $consulta))
+{
+	$fecha_actual = date("Y-m-d");
+	$borrar = true;
+	while ($fila = mysqli_fetch_assoc($resultado)) 
+	{ 
+		if(($fila['estado']=="aceptada")&&($fecha_actual == $fila['fecha_salida']))
+		{
+			$borrar=false;
+		?>
+		<script type="text/javascript"> alert ("Hay solicitudes aceptadas para ese hospedaje!!"); 
+		window.location.href='hospedajes.php'; </script>
+		<?php
+		}
+		
+	}
+	if($borrar)
+	{
+		$sql = "DELETE FROM hospedaje WHERE id_hospedaje = '$id'";
 
-if ($conn->query($sql)) {
-   	?>
-	<script type="text/javascript"> alert ("El Couch fue eliminado correctamente"); 
-	 window.location.href='hospedajes.php'; </script>
-	 <?php
-} else {
-    //echo "Error deleting record: " . $conn->error;
-	?>
-	<script type="text/javascript"> alert ("El Couch no fue eliminado"); 
-	 window.location.href='hospedajes.php'; </script>
-	 <?php
+		if ($conn->query($sql)) 
+		{
+			?>
+			<script type="text/javascript"> alert ("El Couch fue eliminado correctamente"); 
+			 window.location.href='hospedajes.php'; </script>
+			 <?php
+		}
+		else 
+		{
+			//echo "Error deleting record: " . $conn->error;
+			?>
+			<script type="text/javascript"> alert ("El Couch no fue eliminado"); 
+			 window.location.href='hospedajes.php'; </script>
+			 <?php
+		}
+	}
+	
 }
+
+}
+/*
+
 //endConnection();
 }
+*/
 ?>

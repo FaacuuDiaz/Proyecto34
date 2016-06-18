@@ -26,6 +26,8 @@
     $consul="SELECT * FROM tipo_hospedaje";
     $resul=mysqli_query($con,$consul);
     ?>
+	<div class="columnat">TIPOS DE COUCH</div>
+		</br>
     <table>
         <tr class="titulos">
             <td> Tipo</td>

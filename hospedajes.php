@@ -18,6 +18,7 @@
 	<link rel="stylesheet" type="text/css" href="css/responsive.css">
 	<link rel="stylesheet" type="text/css" href="css/estilos.css">
 	<link rel="stylesheet" type="text/css" href="css/menu.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
@@ -41,6 +42,8 @@
 	<?php include("encabezado.php") ?>
 	<section class="div_listado">
 		<div class="wrapper">
+		<div class="columnat">MIS COUCH</div>
+		</br>
 			<table>
 				<tr class="titulos">
 				  <td><strong>Titulo</strong></td>
@@ -58,17 +61,17 @@
 				$consulta = "SELECT * from hospedaje where idusuario='$usuario'";
 				if ($resultado = mysqli_query($cont, $consulta))
 					{
-						while ($fila = mysqli_fetch_row($resultado)) 
+						while ($fila = mysqli_fetch_assoc($resultado)) 
 						{ ?>
 							<tr>
-								<td><?php echo $fila[1]; ?></td>
+								<td><?php echo $fila['titulo']; ?></td>
 								<?php 
-									$id = $fila[0];
-									$estado= $fila[7];
+									$id = $fila['id_hospedaje'];
+									$estado= $fila['estado'];
 								?>
-								<td><?php echo $fila[2];?></td>
-								<td><?php echo $fila[6];?></td>
-								<td><?php echo $fila[7];?></td>
+								<td><?php echo $fila['ciudad'];?></td>
+								<td><?php echo $fila['cant_perso'];?></td>
+								<td><?php echo $fila['estado'];?></td>
 								<td>
 									<a href="javascript:;" onclick="confirmar('borrarHospedaje.php?id=<?php echo $id; ?>'); return false;"><img src="img/eliminar.gif" width=15px height=15px></a>
 								</td>
@@ -93,14 +96,12 @@
 						<?php	
 						}
 					}
-				mysqli_free_result($resultado);
+				//mysqli_free_result($resultado);
 			?>
 			
 			
 			</table>
-				</br>
-				</br>
-				<a href="agregarHospedaje.php"><input type="button" value="Agregar couch"></a>
+				
 		</div>
 	</section>	<!--  end listing section  -->
 

@@ -107,6 +107,13 @@
 					
 					?>
 						<li><a href="buscandoHospedaje.php">Buscar couch</a></li>
+						<li><a href="#">Solicitudes</a>
+							<ul>
+								<li><a href="misSolicitudesEnviadas.php">Enviadas</a></li>
+								<li><a href="misSolicitudesRecibidas.php">Recibidas</a></li>
+							</ul>
+						</li>
+						
 					<?php 
 					
 					if($_SESSION['premium'] == null)

@@ -20,8 +20,11 @@
 			<input type="text" required placeholder="Ingrese su número de tarjeta " name="tarjeta"  pattern="[0-9]{16,16}" title="Se necesita un numero de 16 digitos" onKeypress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;"/>
 			<input type="text" required placeholder="Ingrese su codigo de seguridad " name="seguridad"  pattern="[0-9]{3,3}" title="Se necesita un numero de 3 digitos" onKeypress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;"/>
 			<br/><br/>
-			<input id="chico" type="submit" value="Activar premium">
-			<a href="index.php"><input type="button" value="<< Volver" class="input"></a>
+			
+			
+			<p><button type="submit" name="listo" >Activar Premium</button></p>
+			<a href="index.php"><button type="button" name="cancelar" > Cancelar </button></a>
+			
 		</form>
 
 	</section>	<!--  end listing section  -->

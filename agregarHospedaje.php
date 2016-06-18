@@ -59,9 +59,10 @@
 			
 			
 				</br>			
-			<input type="submit" value="Agregar"class="input" style="margin-right: 0%;">
-			<a href="hospedajes.php"><input type="button" value="Cancelar" class="input" style="margin-right: 0%;"></a>
-		</form>
+				<p><button type="submit" name="listo" > Agregar Couch </button></p>
+				<a href="hospedajes.php"><button type="button" name="cancelar" > Cancelar </button></a>
+				
+			</form>
 		</div>
 	</section>	<!--  end listing section  -->
 
