@@ -118,121 +118,75 @@
 					}
 				?>
 		</ul>	
-								
-								<?php
-								
-								
-								
-								
-								$link = connection();
-								$id_h = $_GET['id'];
-								$id_u = $_SESSION['id_usuario'];
-								$consulta = "SELECT idusuario FROM hospedaje WHERE id_hospedaje='$id_h' ";
-								$result = mysqli_query($link,$consulta);
-								$aux = mysqli_fetch_array($result);
-								$consulta2 = "SELECT * FROM  solicitudes WHERE id_usuario='$id_u' and id_hospedaje='$id_h'";
-								$r= mysqli_query($link,$consulta2);
-								$aux2 = mysqli_fetch_array($r);
-						
-								if($aux['idusuario']== $id_u)
-								{ 	?>
-									<form action="verSolicitudes.php" method="post">
-										<input style="visibility:hidden" name="id" value="<?php echo $id_h; ?>" />
-										</br>
-										<input value="Ver Solicitudes" type="submit" class="btn_soli" />
-									</form>
-									<?php 
-									//echo	"<a  class='btn_soli'  href=verSolicitudes.php> Ver solicitudes </a>";
-								}	
-							
-									
-								else if(mysqli_num_rows($r) ==0 || $aux2['estado']=='rechazada')
-								{	?>
-									<form action="mandarSolicitud.php" method="post">
-										<input style="visibility:hidden" name="idh" value="<?php echo $id_h; ?>" />
-										</br>
-										<input style="visibility:hidden" name="idu" value="<?php echo $id_u; ?>" />
-										</br>
-										<input value="Enviar Solicitud" type="submit" class="btn_soli" />
-									</form>
-									<?php
-									//echo    "<a  class='btn_soli'  href=mandarSolicitud.php?idh=$id_h&idu=$id_u> Enviar solicitud </a>";
-								}
-								else
-								{
-									echo "Ya enviaste una solicitud por este hospedaje, el estado de la solicitud es: ".$aux2['estado'] ;
-								}													
-								//mysqli_close($con);
-									
-						}
+		
+		</br>
+		<?php
+		$link = connection();
+		$id_h = $_GET['id'];
+		if(isset($_SESSION['usuario']))
+		{
+			$id_u = $_SESSION['id_usuario'];
+			$consulta = "SELECT idusuario FROM hospedaje WHERE id_hospedaje='$id_h' ";
+			$result = mysqli_query($link,$consulta);
+			$aux = mysqli_fetch_array($result);
+			$consulta2 = "SELECT * FROM  solicitudes WHERE id_usuario='$id_u' and id_hospedaje='$id_h'";
+			$r= mysqli_query($link,$consulta2);
+			$aux2 = mysqli_fetch_array($r);
+			if($aux['idusuario']== $id_u)
+			{ 	?>
+				<form action="verSolicitudes.php" method="post">
+				</br>
+					<input style="visibility:hidden; width:1px;" name="id" value="<?php echo $id_h; ?>" />
+					<input value="Ver Solicitudes" type="submit" class="btn_soli" />
+				</form>
+				<?php 
+				//echo	"<a  class='btn_soli'  href=verSolicitudes.php> Ver solicitudes </a>";
+			}	
+			else if(mysqli_num_rows($r) ==0 || $aux2['estado']=='rechazada')
+			{	?>
+				<form action="mandarSolicitud.php" method="post">
+				</br>
+					<input style="visibility:hidden; width:1px;" name="idh" value="<?php echo $id_h; ?>"  />
+					<input style="visibility:hidden; width:1px;" name="idu" value="<?php echo $id_u; ?>" />
+					</br>
+					<input value="Enviar Solicitud" type="submit" class="btn_soli" />
+				</form>
+				<?php
+				//echo    "<a  class='btn_soli'  href=mandarSolicitud.php?idh=$id_h&idu=$id_u> Enviar solicitud </a>";
+			}
+			else
+			{
+				echo '</br></br></br>';
+				echo "Ya enviaste una solicitud por este hospedaje, el estado de la solicitud es: ".$aux2['estado'] ;
+			}													
+		}
+		}
 					}
 				}
 			}
 			?>		
 				
-				</br>
-		
-			</br>
-			</br>
-
-		</br>
-		</br>
-		</br>
-
-		</div>
+				</br></br></br>
+			
 
 		<div class="columnat">PREGUNTAS</div>
 		<div>
-		
 		<?php
-				//require ('connection.php');
-				$cont= connection();
-				$id_hospedaje=$_GET['id'];
-				$consulta = "SELECT * from preg_resp where id_hospedaje = $id_hospedaje";
-				if ($resultado = mysqli_query($cont, $consulta))
-					{
-						while ($fila = mysqli_fetch_row($resultado)) 
-						{ 
-							echo $fila[1];
-							
-						}
-					}
-				//mysqli_free_result($resultado);
-				?>
+		$cont= connection();
+		$id_hospedaje=$_GET['id'];
+		$consulta = "SELECT * from preg_resp where id_hospedaje = $id_hospedaje";
+		if ($resultado = mysqli_query($cont, $consulta))
+		{
+			while ($fila = mysqli_fetch_row($resultado)) 
+			{ 
+				echo $fila[1];
+			}
+		}
+		
+		?>
 		
 		</div>
-		<?php
-		/*
-		//session_start();
-                if(isset($_SESSION['usuario'])) 
-				{
-				
-					$cont= connection();
-					$id_usuario=$_SESSION['id_usuario'];
-					$consulta = "SELECT * from solicitudes inner join hospedaje on solicitudes.id_hospedaje = hospedaje.id_hospedaje
-					where hospedaje.idusuario = $id_usuario and solicitudes.id_hospedaje = $id_hospedaje";
-					if ($resultado = mysqli_query($cont, $consulta))
-					{
-						$r=$resultado->fetch_assoc();
-						if($r!=0)
-						{ ?>
-					 
-					<form action="verReservas.php" method="post">
-							<div class="more_listing">
-								<input style="visibility:hidden" name="id" value="<?php echo $id_hospedaje; ?>" />
-								</br>
-								<input value="ver reservas" type="submit" class="more_listing_btn" style="background-color: white;" />
-							<!--	<a  type= "submit" href="#" class="more_listing_btn">Ver reservas</a> -->
-							</div>
-							</form>
-						<?php	
-						}
-					}
-				}
-				
-		*/
-		?>
-		<!-- <a href="javascript:history.go(-1)"><input type="button" value="Volver" class="input"></a> -->
+		</div>
 		</div>
 		
 	</section>	<!--  end listing section  -->

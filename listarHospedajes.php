@@ -4,25 +4,18 @@
 	?>
 	<section class="listings">
 		<div class="wrapper">
-		<br>
-			
-			</br>
-	
-	
+		</br></br>
 		<ul class="properties_list">
 				<?php
 				include_once ('connection.php');
 				$cont= connection();
 				$consulta = "SELECT * from hospedaje where estado='habilitado'";
 				if ($resultado = mysqli_query($cont, $consulta))
-					{
-						while ($fila = mysqli_fetch_row($resultado)) 
-						{ ?>
-							<li>
-							
-							
+				{
+					while ($fila = mysqli_fetch_row($resultado)) 
+					{ ?>
+						<li>
 							<?php 
-							//require_once('connection.php'); 
 								$con=connection();
 								$result = mysqli_query($con,"Select premium from usuario where id_usuario = $fila[9]");	
 								$f = $result->fetch_row() ;
@@ -30,7 +23,7 @@
 								{
 									if($fila[3]==null)
 									{?>
-									<img src="img/foto.png"style="width:340px; height:255px;"/>
+										<img src="img/foto.png"style="width:340px; height:255px;"/>
 									<?php
 									}
 									else
@@ -58,14 +51,10 @@
 						<?php	
 						}
 					}
-				//mysqli_free_result($resultado);
 				?>
-		</ul>
-				
-		</div>
-	</section>	<!--  end listing section  -->
-
-	<?php include("footer.php") ?>
-	
+		</ul>	
+	</div>
+</section>	<!--  end listing section  -->
+<?php include("footer.php") ?>
 </body>
 </html>
