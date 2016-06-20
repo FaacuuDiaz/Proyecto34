@@ -50,7 +50,7 @@
 				  <td><strong>Ciudad</strong></td>
 				  <td><strong>Cant de personas</strong></td>
 				  <td><strong>Estado</strong></td>
-				  <td><strong>Eliminar</strong></td>
+				  <td><strong>Borrar</strong></td>
 				  <td><strong>Editar</strong></td>
 				  <td><strong>Cambiar estado</strong></td>
 				</tr>
@@ -73,21 +73,23 @@
 								<td><?php echo $fila['cant_perso'];?></td>
 								<td><?php echo $fila['estado'];?></td>
 								<td>
-									<a href="javascript:;" onclick="confirmar('borrarHospedaje.php?id=<?php echo $id; ?>'); return false;"><img src="img/eliminar.gif" width=15px height=15px></a>
+									<a href="javascript:;" onclick="confirmar('borrarHospedaje.php?id=<?php echo $id; ?>'); return false;"><img src="img/borrar.png" style="width:100px; height:32px;"></a>
 								</td>
 								<td>
-									<a href="modificarHospedaje.php?id=<?php echo $id; ?>"><img src="img/modificar.png" width=15px height=15px></a>
+									<a href="modificarHospedaje.php?id=<?php echo $id; ?>"><img src="img/editar.png" style="width:100px; height:32px;"></a>
 								</td>
 								<td>
 									<a style="color:black;" href="habilitarHospedaje.php?id=<?php echo $id;?>&estado=<?php echo $estado;?> ">
 									<?php
 									if($estado == "habilitado")
-									{
-										echo "Deshabilitar";
+									{ 	?>
+										<img src="img/ocultar.png" style="width:100px; height:32px;">
+										<?php
 									}
 									else
-									{
-										echo "Habilitar";
+									{ 	?>
+										<img src="img/mostrar.png" style="width:100px; height:32px;">
+										<?php
 									}
 									?>
 									</a>

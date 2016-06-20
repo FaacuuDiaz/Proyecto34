@@ -67,11 +67,11 @@
 			
 			<p>Elige una imagen: 
 			<input type="file" name="foto" class="input"><br>
-			
+			</p>
 			<?php
 			if($hospedaje[3]!=null)
 				{?>
-					<img src="mostrarImagen.php?id=<?php echo $hospedaje[0];?>"class="property_img"style="width:340px; height:255px;"/>
+					<p style="text-align:center;"><img src="mostrarImagen.php?id=<?php echo $hospedaje[0];?>"class="property_img"style="width:340px; height:255px;"/></p>
 				<?php
 				}
 			
@@ -81,7 +81,7 @@
 				</br>			
 				
 	<?php }}}} ?>		
-				</p>
+				
 				
 			<input type="submit" value="Modificar"class="input"  style="margin-right: 0%;">
 			<a href="hospedajes.php"><input type="button" value="Cancelar" class="input" style="margin-right: 0%;"></a>
