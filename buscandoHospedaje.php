@@ -14,20 +14,39 @@
 		<div class="wrapper">
 			<div class="columnat">BUSQUEDA DE COUCH</div>
 			</br>
-				<form name="form1" action="buscarHospedaje.php" method="post" onsubmit="return validarFecha()">
-				<?php if(isset($_POST['buscar']))
-						{$buscar=$_POST['buscar'];}
-					?>
-				<input name="buscar" class="buscarFiltro" type="text" value="<?php if(isset($_POST['buscar']))
-						{ echo $_POST['buscar'];}
-					?>">
-				<input name="fechaDesde" id="fechaDesde" class="buscarFiltro" type="date"value="<?php if(isset($_POST['fechaDesde']))
-						{ echo $_POST['fechaDesde'];}
-					?>">
-				<input name="fechaHasta" id="fechaHasta" class="buscarFiltro" type="date"value="<?php if(isset($_POST['fechaHasta']))
-						{ echo $_POST['fechaHasta'];}
-					?>">
+				<form name="form1" action="buscarHospedaje.php" method="post" onsubmit="return validarFechaBusqueda()">
+				Texto a buscar:
+				<?php if(isset($_POST['buscar'])){$buscar=$_POST['buscar'];}?>
+					
+				<input name="buscar" class="buscarFiltro" type="text" value="<?php if(isset($_POST['buscar'])){ echo $_POST['buscar'];} ?>">
 				
+				Fecha desde:
+				<input name="fechaDesde" id="fechaDesde" class="buscarFiltro" type="date"value="<?php if(isset($_POST['fechaDesde'])){ echo $_POST['fechaDesde'];} ?>">
+				
+				Fecha hasta:
+				<input name="fechaHasta" id="fechaHasta" class="buscarFiltro" type="date"value="<?php if(isset($_POST['fechaHasta'])){ echo $_POST['fechaHasta'];} ?>">
+				
+				Tipo: 
+			
+			<select name="tipos">
+			<option value="null">Seleccione un tipo de couch</option>
+			<?php 
+				require_once ('connection.php');
+				$cont= connection();
+				$consulta = "SELECT * from tipo_hospedaje where estado='habilitado'";
+				if ($resultado = mysqli_query($cont, $consulta))
+				{
+					while ($fila = mysqli_fetch_assoc($resultado)) 
+					{	?>
+						<option value="<?php echo $fila['id_tipo']; ?>"
+						<?php if((isset($_POST['tipos']))&&($_POST['tipos'] == $fila['id_tipo']))
+						{ echo "selected='selected'"; } ?> > <?php echo $fila['nombre_tipo']; ?></option>
+						<?php	
+					}
+				}
+				mysqli_free_result($resultado);
+			?>
+			</select>
 				
 				
 				<input class="buscarFiltro" type="submit"  value="Buscar">
@@ -104,11 +123,15 @@
 						
 					</ul>
 					<?php
-				//mysqli_free_result($resultado);
+					//mysqli_free_result($resultado);
 					}
 				}
-				
-				 
+				else
+				{
+					 ?>
+						<div class="resBus">Seleccione una busqueda!</div>
+						<?php
+				}
 				?>
 		
 				

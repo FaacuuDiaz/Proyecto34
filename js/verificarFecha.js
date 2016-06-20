@@ -17,3 +17,14 @@ function validarFecha() {
 		else if(fechaHasta<fechaDesde){alert("La fecha hasta es menor a la fecha desde!!"); return false;}
 		else{return true;}
 		}
+function validarFechaBusqueda() {
+    var fechaDesde = document.getElementById("fechaDesde").value;
+    var fechaHasta = document.getElementById("fechaHasta").value;
+	
+    
+		if((fechaDesde == "")&(fechaHasta == "")) { return true; }
+		else if((fechaDesde != "")&(fechaHasta == "")) {alert("La fecha hasta no esta seleccionada!!"); return false;}
+		else if((fechaDesde == "")&(fechaHasta != "")) {alert("La fecha desde no esta seleccionada!!"); return false;}
+        else if(fechaHasta<fechaDesde){alert("La fecha hasta es menor a la fecha desde!!"); return false;}
+		else{return true;}
+		}

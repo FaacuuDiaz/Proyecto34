@@ -1,68 +1,82 @@
 
 <?php 
 function busqueda(){
-if((isset($_POST['buscar'])||(!isset($_POST['fechaDesde']))||(!isset($_POST['fechaHasta']))))  
-{	
-	 $buscar=$_POST['buscar'];
-	 $fechaDesde=$_POST['fechaDesde'];
-	 $fechaHasta=$_POST['fechaHasta'];
-	if($fechaDesde==""){$fechaDesde="null";}
-	if($fechaHasta==""){$fechaHasta="null";}
-	
-if(($buscar!="null")&&($fechaDesde=="null")&&($fechaHasta=="null"))  	 
-{
-	echo "texto";
-	$buscar=$_POST['buscar'];
-	require ('connection.php');
+	require_once ('connection.php');
 	$cont= connection();
-	$consulta = "SELECT * from hospedaje where estado='habilitado' and (titulo  like '%$buscar%' or 
-																	
-																		ciudad like '%$buscar%' or
-																		descripcion like '%$buscar%' or 
-																		ciudad like '%$buscar%')";
-	$resultado = mysqli_query($cont, $consulta);
-	return $resultado;
-}
-else if(($buscar!="")&&($fechaDesde!="null")&&($fechaHasta!="null"))  	 
+if ((isset($_POST['buscar'])) || (isset($_POST['tipo_hospedaje'])) || (isset($_POST['fechaDesde'])) || (isset($_POST['fechaHasta'])) )
 {
-	echo "todo";
-	require ('connection.php');
-	$cont= connection();
-	$consulta = "SELECT * from hospedaje where estado='habilitado' and (titulo  like '%$buscar%' or 
-																					cant_perso >= '$buscar' or
-																					ciudad like '%$buscar%' or
-																					descripcion like '%$buscar%' or 
-																					ciudad like '%$buscar%') AND h.id_hospedaje not in 
-	(SELECT s.id_hospedaje 
-	FROM solicitudes s 
-	WHERE  s.estado = 'aceptada' 
-	and (s.fecha_entrada between '$fechaDesde' and '$fechaHasta') 
-	or (s.fecha_salida between '$fechaDesde' and '$fechaHasta' ))";
-	$resultado = mysqli_query($cont, $consulta);
-	return $resultado;
+	$texto=$_POST['buscar'];
+	$tipo=$_POST['tipos'];
+	$fechad=$_POST['fechaDesde'];
+	$fechah=$_POST['fechaHasta'];
+
+	if (($texto =="") && ($tipo != "null") && ($fechad !="") && ($fechah !="") ) 
+	{
+		$sql =	"SELECT * FROM hospedaje h INNER JOIN tipo_hospedaje t ON h.idtipo = t.id_tipo
+		WHERE t.id_tipo = $tipo AND h.estado = 'habilitado'
+		AND h.id_hospedaje NOT IN (SELECT s.id_hospedaje FROM solicitudes s WHERE s.estado = 'aceptada' 
+		AND (s.fecha_entrada BETWEEN '$fechad' AND '$fechah' OR s.fecha_salida BETWEEN '$fechad' AND '$fechah'
+		OR '$fechad' BETWEEN s.fecha_entrada AND s.fecha_salida OR '$fechah' BETWEEN s.fecha_entrada AND s.fecha_salida))";
+		return mysqli_query($cont, $sql);
+	}	
 	
-}
-else if(($buscar=="")&&($fechaDesde!="null")&&($fechaHasta!="null"))  	 
-{
-	echo "fecha";
-	$fechaDesde=$_POST['fechaDesde'];
-	$fechaHasta=$_POST['fechaHasta'];
-	require ('connection.php');
-	$cont= connection();
-	$consulta = "SELECT * FROM hospedaje h where estado='habilitado' AND h.id_hospedaje not in 
-	(SELECT s.id_hospedaje 
-	FROM solicitudes s 
-	WHERE  s.estado = 'aceptada' 
-	and (s.fecha_entrada between '$fechaDesde' and '$fechaHasta') 
-	or (s.fecha_salida between '$fechaDesde' and '$fechaHasta' ))";
+	else if (($texto !="") && ($tipo == "null") && ($fechad !="") && ($fechah !=""))
+	{
+		$sql ="SELECT * FROM hospedaje h WHERE (h.titulo LIKE '%$texto%' OR h.descripcion LIKE '%$texto%' 
+		OR h.ciudad LIKE '%$texto%') AND h.estado = 'habilitado' 
+		AND h.id_hospedaje NOT IN (SELECT s.id_hospedaje FROM solicitudes s WHERE s.estado = 'aceptada' 
+		AND (s.fecha_entrada BETWEEN '$fechad' AND '$fechah' OR s.fecha_salida BETWEEN '$fechad' AND '$fechah'
+		OR '$fechad' BETWEEN s.fecha_entrada AND s.fecha_salida OR '$fechah' BETWEEN s.fecha_entrada AND s.fecha_salida))";
+return mysqli_query($cont, $sql);
+		
+	}
 	
-	$resultado = mysqli_query($cont, $consulta);
-	return $resultado;
+	else if (($texto !="") && ($tipo != "null") && ($fechad =="") && ($fechah ==""))
+	{
+		$sql ="SELECT * FROM hospedaje h INNER JOIN tipo_hospedaje t ON h.idtipo = t.id_tipo WHERE  t.id_tipo = '$tipo' AND h.estado = 'habilitado' AND (h.titulo LIKE '%$texto%' OR h.descripcion LIKE '%$texto%' OR h.ciudad LIKE '%$texto%')";
+		return mysqli_query($cont, $sql);
+	}
 	
+	else if (($texto !="") && ($tipo != "null") && ($fechad !="") && ($fechah !=""))
+	{
+		$sql ="SELECT * FROM hospedaje h INNER JOIN tipo_hospedaje t ON h.idtipo = t.id_tipo 
+		WHERE h.estado = 'habilitado' AND  t.id_tipo = '$tipo' AND (h.titulo LIKE '%$texto%' OR h.descripcion LIKE '%$texto%' 
+		OR h.ciudad LIKE '%$texto%') AND h.id_hospedaje NOT IN (SELECT s.id_hospedaje FROM solicitudes s WHERE s.estado = 'aceptada' 
+		AND (s.fecha_entrada BETWEEN '$fechad' AND '$fechah' OR s.fecha_salida BETWEEN '$fechad' AND '$fechah'
+		OR '$fechad' BETWEEN s.fecha_entrada AND s.fecha_salida OR '$fechah' BETWEEN s.fecha_entrada AND s.fecha_salida))";
+		return mysqli_query($cont, $sql);
+	}
+	
+	else if (($texto =="") && ($tipo == "null") && ($fechad !="") && ($fechah !=""))
+	{
+		$sql ="SELECT * FROM hospedaje h WHERE h.estado = 'habilitado' AND h.id_hospedaje NOT IN 
+		(SELECT s.id_hospedaje FROM solicitudes s WHERE s.estado = 'aceptada' 
+		AND (s.fecha_entrada BETWEEN '$fechad' AND '$fechah' OR s.fecha_salida BETWEEN '$fechad' AND '$fechah'
+		OR '$fechad' BETWEEN s.fecha_entrada AND s.fecha_salida OR '$fechah' BETWEEN s.fecha_entrada AND s.fecha_salida))";
+		return mysqli_query($cont, $sql);
+	}
+	
+	else if (($texto !="") && ($tipo == "null") && ($fechad =="") && ($fechah ==""))
+	{
+		$sql ="SELECT * FROM hospedaje h WHERE h.estado = 'habilitado' AND (h.titulo LIKE '%$texto%' OR h.descripcion LIKE '%$texto%' OR h.ciudad LIKE '%$texto%') ";
+		return mysqli_query($cont, $sql);
+	}
+	
+	else if (($texto =="") && ($tipo != "null") && ($fechad =="") && ($fechah ==""))
+	{
+		$sql ="SELECT * FROM hospedaje h INNER JOIN tipo_hospedaje t ON h.idtipo = t.id_tipo WHERE t.id_tipo = '$tipo' AND h.estado = 'habilitado'";
+		return mysqli_query($cont, $sql);
+	}
+	else if (($texto =="") && ($tipo == "null") && ($fechad =="") && ($fechah =="")) 
+	{
+		?>
+		<script type="text/javascript"> alert ("Debe seleccionar una busqueda primero!!"); </script>
+		<?php
+	}
 }
 
 }
-}
+
 $hospedajes=busqueda();
 
 require ('buscandoHospedaje.php');

@@ -26,7 +26,7 @@
 				$usuario=$_SESSION['id_usuario'];
 				$consulta = "SELECT u.nombre, u.apellido, h.titulo, s.fecha_solicitud, s.fecha_entrada, s.fecha_salida, s.estado, s.descripcion, h.id_hospedaje, s.id_usuario
 								from solicitudes s inner join usuario u on s.id_usuario = u.id_usuario 
-								                   inner join hospedaje h on h.id_hospedaje = s.id_hospedaje where h.idusuario='$usuario'";
+								                   inner join hospedaje h on h.id_hospedaje = s.id_hospedaje where h.idusuario='$usuario' order by s.fecha_entrada";
 				if ($resultado = mysqli_query($cont, $consulta))
 					{
 						while ($fila = mysqli_fetch_assoc($resultado)) 
