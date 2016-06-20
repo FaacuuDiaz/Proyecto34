@@ -72,13 +72,13 @@
 								<td><?php echo $fila['ciudad'];?></td>
 								<td><?php echo $fila['cant_perso'];?></td>
 								<td><?php echo $fila['estado'];?></td>
-								<td>
+								<td style="width:100px; padding:1%;">
 									<a href="javascript:;" onclick="confirmar('borrarHospedaje.php?id=<?php echo $id; ?>'); return false;"><img src="img/borrar.png" style="width:100px; height:32px;"></a>
 								</td>
-								<td>
+								<td style="width:100px; padding:1%;">
 									<a href="modificarHospedaje.php?id=<?php echo $id; ?>"><img src="img/editar.png" style="width:100px; height:32px;"></a>
 								</td>
-								<td>
+								<td style="width:100px; padding:1%;">
 									<a style="color:black;" href="habilitarHospedaje.php?id=<?php echo $id;?>&estado=<?php echo $estado;?> ">
 									<?php
 									if($estado == "habilitado")

@@ -24,7 +24,7 @@
 				$usuario=$_SESSION['id_usuario'];
 				$conh= connection();
 				$hospedajes = "SELECT * FROM hospedaje";
-				$consulta = "SELECT s.id_hospedaje, s.fecha_solicitud, s.fecha_entrada, s.fecha_salida, s.estado, s.descripcion from solicitudes s where s.id_usuario='$usuario'";
+				$consulta = "SELECT s.id_hospedaje, s.fecha_solicitud, s.fecha_entrada, s.fecha_salida, s.estado, s.descripcion from solicitudes s where s.id_usuario='$usuario' order by s.fecha_entrada";
 				if ($resultado = mysqli_query($cont, $consulta))
 					{
 						while ($fila = mysqli_fetch_assoc($resultado)) 

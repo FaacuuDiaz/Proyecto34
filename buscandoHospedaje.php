@@ -15,15 +15,15 @@
 			<div class="columnat">BUSQUEDA DE COUCH</div>
 			</br>
 				<form name="form1" action="buscarHospedaje.php" method="post" onsubmit="return validarFechaBusqueda()">
-				texto a buscar:
+				Texto a buscar:
 				<?php if(isset($_POST['buscar'])){$buscar=$_POST['buscar'];}?>
 					
 				<input name="buscar" class="buscarFiltro" type="text" value="<?php if(isset($_POST['buscar'])){ echo $_POST['buscar'];} ?>">
 				
-				fecha desde:
+				Fecha desde:
 				<input name="fechaDesde" id="fechaDesde" class="buscarFiltro" type="date"value="<?php if(isset($_POST['fechaDesde'])){ echo $_POST['fechaDesde'];} ?>">
 				
-				fecha hasta:
+				Fecha hasta:
 				<input name="fechaHasta" id="fechaHasta" class="buscarFiltro" type="date"value="<?php if(isset($_POST['fechaHasta'])){ echo $_POST['fechaHasta'];} ?>">
 				
 				Tipo: 
@@ -129,7 +129,7 @@
 				else
 				{
 					 ?>
-						<div class="resBus">No se encontraron resultados de la búsqueda</div>
+						<div class="resBus">Seleccione una busqueda!</div>
 						<?php
 				}
 				?>

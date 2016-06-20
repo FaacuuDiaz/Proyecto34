@@ -15,14 +15,14 @@
 				<td> Tipo</td>
 				<td> Estado</td>
 				<td> Editar</td>
-				<td> Eliminar</td>
+				<td> Borrar</td>
 			</tr>
 		<?php while($fila=mysqli_fetch_array($resul)) {	?> 
 			<tr>
 				<td><?php echo $fila['nombre_tipo']; ?></td>
 				<td><?php echo $fila['estado']; ?></td>
-				<td style="width:100px;"><a href="formulario.php?var=5&id_tipo=<?php echo $fila['id_tipo']; ?>" > <img src="img/editar.png" style="width:100px; height:32px;"> </a> </td>
-				<td style="width:100px;"><a href="javascript:;" onclick="confirmar('eliminarTipo.php?id_tipo=<?php echo $fila['id_tipo']; ?>'); return false;"><img src="img/borrar.png" style="width:100px; height:32px;"> </a></td>
+				<td style="width:100px; padding:1%;"><a href="formulario.php?var=5&id_tipo=<?php echo $fila['id_tipo']; ?>" > <img src="img/editar.png" style="width:100px; height:32px;"> </a> </td>
+				<td style="width:100px; padding:1%;"><a href="javascript:;" onclick="confirmar('eliminarTipo.php?id_tipo=<?php echo $fila['id_tipo']; ?>'); return false;"><img src="img/borrar.png" style="width:100px; height:32px;"> </a></td>
 			</tr>   
 			<?php } ?> 
 		</table>
