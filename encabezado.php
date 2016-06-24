@@ -62,6 +62,8 @@
 				{ 	?>
 					<a href="formulario.php?var=2" class="login_btn">Iniciar sesion</a>
 					<a href="formulario.php?var=3" class="login_btn">Registrarme</a>
+					<a href="formulario_recuperarContrasena.php" class="login_btn">Olvide mi contraseña</a>
+					<!--<p><a style="text-align:right;margin:1;" href="formulario_recuperarContrasena.php" >Olvide mi contraseña</a></p> -->
 					<?php
 				} ?>
 				</nav>
@@ -84,6 +86,7 @@
 							<ul>
 								<li><a href="agregarHospedaje.php">Agregar couch</a></li>
 								<li><a href="hospedajes.php">Listar mis couch</a></li>
+								<li><a href="verHospedajesVisitados.php">Couchs visitados</a></li>
 							</ul>
 						</li>
 						<li><a href="#">Tipos de Couch</a>
@@ -100,6 +103,7 @@
 							<ul>
 								<li><a href="agregarHospedaje.php">Agregar couch</a></li>
 								<li><a href="hospedajes.php">Listar mis couchs</a></li>
+								<li><a href="verHospedajesVisitados.php">Couchs visitados</a></li>
 							</ul>
 						</li>
 					<?php

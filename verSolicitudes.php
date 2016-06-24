@@ -37,9 +37,9 @@
 							<td><?php echo $fila['estado']; 
 										if($fila['estado']=='pendiente'){ ?> 
 											<br/> 
-											<a href="aceptarSolicitud.php?idHospedaje=<?php echo $fila['id_hospedaje'];?>&idUsuario=<?php echo $fila['id_usuario'];?>&fd=<?php echo $fila['fecha_entrada'];?>&fh=<?php echo $fila['fecha_salida'];?> " > Aceptar </a> 
+											<a onClick="return confirm('Seguro que desea aceptar?')" href="aceptarSolicitud.php?idHospedaje=<?php echo $fila['id_hospedaje'];?>&idUsuario=<?php echo $fila['id_usuario'];?>&fd=<?php echo $fila['fecha_entrada'];?>&fh=<?php echo $fila['fecha_salida'];?> " > Aceptar </a> 
 											<br/> 
-											<a href="rechazarSolicitud.php?idHospedaje=<?php echo $fila['id_hospedaje']; ?>&idUsuario=<?php echo $fila['id_usuario'];?>" > Rechazar </a>
+											<a onClick="return confirm('Seguro que desea rechazar?')" href="rechazarSolicitud.php?idHospedaje=<?php echo $fila['id_hospedaje']; ?>&idUsuario=<?php echo $fila['id_usuario'];?>" > Rechazar </a>
 										<?php } ?>
 							</td>
 							<td><?php echo $fila['descripcion'];?></td>

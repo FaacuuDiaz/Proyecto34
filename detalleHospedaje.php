@@ -80,7 +80,8 @@
 		<div>PROMEDIO: </div>
 
 		<link rel="stylesheet" type="text/css" href="css/star_rating.css">
-				
+		<a onClick=" document.getElementById('titulo_comentario').hidden=false; document.getElementById('contenido_comentario').hidden=false;" href="detalleHospedaje.php?id=<?php echo $_GET['id'] ?>#titulo_comentario">
+								
 		<ul class="stars stars-32" data-value="4.5" data-votes="1866" data-id="3">
 		<?php
 				//require ('connection.php');
@@ -92,7 +93,7 @@
 				where hospedaje.id_hospedaje = $id_hospedaje";
 				if ($resultado = mysqli_query($cont, $consulta))
 					{
-						if ($fila = mysqli_fetch_row($resultado)) 
+						if ($fila = mysqli_fetch_row($resultado))  
 						{ 
 							
 							$r=$fila[0];
@@ -118,8 +119,8 @@
 					}
 				?>
 		</ul>	
-		
-		</br>
+		 </a>
+ 		</br>
 		<?php
 		$link = connection();
 		$id_h = $_GET['id'];
@@ -180,6 +181,29 @@
 			while ($fila = mysqli_fetch_row($resultado)) 
 			{ 
 				echo $fila[1];
+			}
+		}
+		
+		?>
+		
+		</div></br></br></br>
+		<div hidden=true id="titulo_comentario" class="columnat">COMENTARIOS</div>
+		<div hidden=true id="contenido_comentario">
+		<?php
+		$cont= connection();
+		$id_hospedaje=$_GET['id'];
+		$consulta = "SELECT u.nick, c.puntuacion, c.comentario from comentario c inner join hospedaje_comentario hc ON c.id_comentario=hc.id_comentario inner join usuario u ON c.id_usuario=u.id_usuario where id_hospedaje = $id_hospedaje";
+		if ($resultado = mysqli_query($cont, $consulta))
+		{
+			while ($fila = mysqli_fetch_array($resultado)) 
+			{ ?>
+				<div class="comentario">	 <?php
+				echo "<p>".$fila['nick']." dice: </p>";
+				echo "</br> Puntuacion: ";
+				echo $fila['puntuacion'];
+				echo "</br>";
+				echo $fila['comentario']; ?>
+				</div> <?php
 			}
 		}
 		

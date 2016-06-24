@@ -8,7 +8,18 @@
     padding:1%;
     margin:1%;
 }
+.comentario{
+	
+	background-color: #96ac3c;
+	color:white;
+	padding:2%;
+	margin:2%;
+	font-family: "lato-regular", Helvetica, Arial, sans-serif;
 
+}
+.comentario p {
+	font-weight: bold;
+}
 .div_formulario{
 	width: 60%;
 	opacity: 0.65;

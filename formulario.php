@@ -18,7 +18,12 @@
 			elseif($_GET['var']== 5){
 				include("formulario_editarTipo.php");
 			}
-
+			elseif($_GET['var']== 6){
+				include("formulario_editPass.php");
+			}
+			elseif($_GET['var']== 7){
+				include("formulario_comentarHospedaje.php");
+			}
 			
 	?>
 </section>
