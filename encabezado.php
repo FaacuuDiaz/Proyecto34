@@ -62,8 +62,6 @@
 				{ 	?>
 					<a href="formulario.php?var=2" class="login_btn">Iniciar sesion</a>
 					<a href="formulario.php?var=3" class="login_btn">Registrarme</a>
-					<a href="formulario_recuperarContrasena.php" class="login_btn">Olvide mi contraseña</a>
-					<!--<p><a style="text-align:right;margin:1;" href="formulario_recuperarContrasena.php" >Olvide mi contraseña</a></p> -->
 					<?php
 				} ?>
 				</nav>

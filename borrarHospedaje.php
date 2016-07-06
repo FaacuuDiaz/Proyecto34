@@ -14,7 +14,7 @@
 			$borrar = true;
 			while ($fila = mysqli_fetch_assoc($resultado)) 
 			{ 
-				if(($fila['estado']=="aceptada")&&($fecha_actual == $fila['fecha_salida']))
+				if(($fila['estado']=="aceptada")&&($fecha_actual < $fila['fecha_entrada']))
 				{
 					$borrar=false;
 				?>

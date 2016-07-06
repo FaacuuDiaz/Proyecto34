@@ -170,17 +170,21 @@
 				</br></br></br>
 			
 
-		<div class="columnat">PREGUNTAS</div>
-		<div>
+		
+		
 		<?php
 		$cont= connection();
 		$id_hospedaje=$_GET['id'];
 		$consulta = "SELECT * from preg_resp where id_hospedaje = $id_hospedaje";
 		if ($resultado = mysqli_query($cont, $consulta))
 		{
-			while ($fila = mysqli_fetch_row($resultado)) 
-			{ 
+			if(mysqli_num_rows($resultado)>0){
+				?>
+				<div class="columnat">PREGUNTAS</div> <?php
+				while ($fila = mysqli_fetch_row($resultado)) 
+				{ 
 				echo $fila[1];
+				}
 			}
 		}
 		

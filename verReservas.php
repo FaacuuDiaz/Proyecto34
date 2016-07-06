@@ -42,7 +42,6 @@
 			<table>
 <tr class="titulos">
   <td><strong>Usuario</strong></td>
-  <td><strong>Fecha solicitud</strong></td>
   <td><strong>Fecha entrada</strong></td>
   <td><strong>Fecha salida</strong></td>
   <td><strong>Estado</strong></td>
@@ -71,7 +70,6 @@
 								<?php //$id = $fila[0];
 									//$estado= $fila[7];
 								?>
-								<td><?php echo $fila['fecha_solicitud'];?></td>
 								<td><?php echo $fila['fecha_entrada'];?></td>
 								<td><?php echo $fila['fecha_salida'];?></td>
 								<td><?php echo $fila['estado'];?></td>

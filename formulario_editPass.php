@@ -8,4 +8,5 @@
 	<p>Contraseña nueva: <input type="password" name="nue" id="nue" required  placeholder="Ingrese su contraseña nueva"/></p>
 	<p>Reescriba contraseña: <input type="password" name="nue2" id="nue2" required  placeholder="Reescriba su contraseña nueva"/></p>
 	<p><button type="submit" id="listo" name="listo"> Listo </button></p>
+	<a href="formulario.php?edit=true&var=1"><button type="button" name="cancelar"> Cancelar </button></a>
 </form>

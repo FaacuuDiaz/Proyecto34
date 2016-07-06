@@ -26,8 +26,8 @@
 		if($aux['estado'] == "aceptada"){
 			$fe = new dateTime($aux['fecha_entrada']);
 			$fe = date_format($fe,"Y-m-d");
-			$fh = new dateTime($aux['fecha_salida']);
-			$fh = date_format($fh,"Y-m-d");
+			$fs = new dateTime($aux['fecha_salida']);
+			$fs = date_format($fs,"Y-m-d");
 			if( fechaIncluidaEntre($desde,$fe,$fs) || fechaIncluidaEntre($hasta,$fe,$fs) ){
 					$ok = false;
 			}

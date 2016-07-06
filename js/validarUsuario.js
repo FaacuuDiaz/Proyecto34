@@ -19,7 +19,7 @@ function validarUsuario(registro) {
 			}
 			
 			if (pass == null || pass.length < 8) {
-				alert("Por favor, ingrese una contraseña valida. Por su seguridad, la clave debe tener 8 o mas caracteres");
+				alert("Por favor, ingrese una contrase\u00F1a valida. Por su seguridad, la clave debe tener 8 o mas caracteres");
 				return false;
 			}
 			return true;		

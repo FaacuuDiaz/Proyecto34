@@ -10,4 +10,5 @@
 	</select>	
 	<textarea placeholder="Escriba su comentario aqui..." rows="5" cols="50" name="comentario"></textarea> <input name="id_h" type="hidden" value="<?php echo $_GET['id_h'] ?>"/>
 	<p><button type="submit" id="listo" name="listo"> Dejar comentario </button></p>
+	<a href="verHospedajesVisitados.php"><button  type="button" name="cancelar" > Cancelar </button> </a>
 </form>

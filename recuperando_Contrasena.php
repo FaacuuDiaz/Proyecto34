@@ -4,7 +4,7 @@
 	$email=$_POST['email'];
 	$consul="SELECT * FROM usuario where email='$email'";
 	$resul=mysqli_query($con,$consul);
-	if($resul){
+	if(mysqli_num_rows($resul)>0){
 		$fila=mysqli_fetch_array($resul);
 		$pass=$fila['password'];
 		$dir = "./mensaje/Mensaje-para-".$fila['email'].".txt";
@@ -19,7 +19,7 @@
 	else{
 		?>
 		<script type="text/javascript"> alert ("Debe ingresar un mail existente en el sistema"); 
-			window.location.href='formulario_recuperarContraseña.php'; </script>	
+			window.location.href='formulario_recuperarContrasena.php'; </script>	
 		<?php	
 	}
 ?>	

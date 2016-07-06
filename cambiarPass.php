@@ -18,7 +18,7 @@ if ($act == $fila['password']) {
 		$consulta = "UPDATE usuario SET password='$nue' WHERE id_usuario=$id_usuario";
 		$result= mysqli_query($link,$consulta);
 		if($result){?>
-			<script type="text/javascript"> alert ("La contraseña ha sido cambiada correctamente"); 
+			<script type="text/javascript"> alert ("La contrase\u00F1a ha sido cambiada correctamente"); 
 			window.location.href='formulario.php?edit=true&var=1'; </script>
 			<?php				
 		}
@@ -33,14 +33,14 @@ if ($act == $fila['password']) {
 	}
 	else{
 		?>
-	<script type="text/javascript"> alert ("La contraseña nueva no coincide"); 
+	<script type="text/javascript"> alert ("La contrase\u00F1a nueva no coincide"); 
 	window.location.href='formulario.php?var=6'; </script>
 	<?php	
 	}
 }
 else{
 	?>
-	<script type="text/javascript"> alert ("La contraseña actual es incorrecta"); 
+	<script type="text/javascript"> alert ("La contrase\u00F1a actual es incorrecta"); 
 	window.location.href='formulario.php?var=6'; </script>
 	<?php
 }
