@@ -28,18 +28,19 @@
 		$nombre = $_POST['nombre'];
 		$apellido = $_POST['apellido'];
 		$nick = $_POST['nick'];
+		$tel = $_POST['tel'];
 		$contraseña = $_POST['pass'];
 		$email = $_POST['email'];
 		$fecha = $_POST['fecha'];
 		$admin = 'no';
 		
 		if(!$edit){
-			$consulta = "INSERT INTO usuario (id_usuario,nick,password,nombre,apellido,email,fecha_nac,admin)
-						VALUES (null,'".$nick."','".$contraseña."','".$nombre."','".$apellido."','".$email."','".$fecha."', '".$admin."')";
+			$consulta = "INSERT INTO usuario (id_usuario,nick,password,nombre,apellido,tel,email,fecha_nac,admin)
+						VALUES (null,'".$nick."','".$contraseña."','".$nombre."','".$apellido."','".$tel."','".$email."','".$fecha."', '".$admin."')";
 		}
 		else
 		{
-			$consulta = "UPDATE usuario SET nick='".$nick."', password='".$contraseña."',  nombre='".$nombre."', apellido='".$apellido."', email='".$email."', fecha_nac='".$fecha."' ";
+			$consulta = "UPDATE usuario SET nick='".$nick."', password='".$contraseña."',  nombre='".$nombre."', apellido='".$apellido."', tel ='".$tel."', email='".$email."', fecha_nac='".$fecha."' ";
 			$_SESSION['usuario'] = $email;
 			$_SESSION['nick'] = $nick;
 

@@ -93,6 +93,14 @@
 								<li><a href="listarTipos.php">Listar tipos de Couch</a></li>
 							</ul>
 						</li>
+						<li><a href="#">Reportes</a>
+							<ul>
+								<li><a href="reportarAceptadas.php">Reportar solicitudes aceptadas</a></li>
+								<li><a href="reportarPremium.php">Reportar usuarios premium</a></li>
+								<li><a href="reportarHospedajes.php">Reportar todos los hospedajes</a></li>
+
+							</ul>
+						</li>
 					<?php 
 					}
 					else

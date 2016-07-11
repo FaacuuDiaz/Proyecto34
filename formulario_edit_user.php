@@ -12,6 +12,8 @@
 	<form class ="formulario" name="registro"  id="registro" action="agregarUsuario.php?edit=true" method="post" enctype="multipart/form-data" onSubmit="return validarUsuario(this);">
 		<p>Nombre: <input type="text" name="nombre" id="nombre" required   placeholder="El nombre no puede contener numeros ni simbolos" value="<?php echo $fila['nombre']; ?>"/></p>
 		<p>Apellido: <input type="text" name="apellido" id="apellido" required  placeholder="El nombre no puede contener numeros ni simbolos" value="<?php echo $fila['apellido']; ?>" /></p>
+		<p>Telefono: <input type="text" name="tel" id="tel" required  placeholder="Ingrese su telefono"  value="<?php echo $fila['tel']; ?>" /></p>
+
 		<p>Nick: <input type="text" name="nick" id="nick" required  placeholder="Elija un apodo" value="<?php echo $fila['nick']; ?>" /></p>
 <!--		<p>Contraseña: <input type="password" name="pass" id="contraseña" required  placeholder="Minimo 8 caracteres" value="<?php echo $fila['password']; ?>" /></p> -->
 		<p>Email: <input type="email" name="email" id="email" required="true"  placeholder="ejemplo@xxx.com" value="<?php echo $fila['email']; ?>" /></p>

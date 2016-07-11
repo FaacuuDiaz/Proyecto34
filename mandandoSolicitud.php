@@ -36,14 +36,18 @@
 	//echo $ok;
 	
 	if($ok){
-		$consulta2 ="INSERT INTO solicitudes(fecha_solicitud,fecha_entrada,fecha_salida,estado,descripcion,id_usuario,id_hospedaje)
- 				VALUES('$fecha_actual','$desde','$hasta','pendiente','$desc','$id_solicitante','$id_hospedaje')";
+		$consulta2 ="INSERT INTO solicitudes(fecha_entrada,fecha_salida,estado,descripcion,id_usuario,id_hospedaje)
+ 				VALUES('$desde','$hasta','pendiente','$desc','$id_solicitante','$id_hospedaje')";
  		if(mysqli_query($link,$consulta2)){ ?>
  			<script type="text/javascript"> alert ("La solicitud se ha enviado correctamente, puedes ver su estado en Mis Solicitudes!"); 
 				window.location.href="detalleHospedaje.php?id=<?php echo $id_hospedaje; ?>"; </script>
 			<?php
  		}
- 		else foreach ($_POST as $a ) echo $a."--";
+ 		else ?>
+ 			<script type="text/javascript"> alert ("Error inesperado"); 
+				window.location.href="mandarSolicitud.php?idh=<?php echo $id_hospedaje; ?>&idu=<?php echo $id_solicitante; ?>"; </script>
+			<?php
+ 	
  	}
  	else{ ?>
  			<script type="text/javascript"> alert ("El hospedaje esta ocupado  en las fechas solicitadas"); 
