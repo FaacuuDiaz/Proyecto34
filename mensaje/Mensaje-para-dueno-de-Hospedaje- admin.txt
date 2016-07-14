@@ -1,0 +1,3 @@
+Has aceptado la solicitud de nick ya puedes comunicarte con el
+ su direccion de correo electronico es nombre@mail.com y su telefono es 0 
+ Aqui tienes un link del hospedaje en cuestion http://localhost/detalleHospedaje.php?id=43 

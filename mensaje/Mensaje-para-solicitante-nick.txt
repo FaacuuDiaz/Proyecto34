@@ -1,0 +1,3 @@
+Tu solicitud en el hospedaje asd ha sido aceptado! 
+Ahora puedes comunicarte con el dueño, su direccion de correo electronica es admin@mail.com y su telefono es 1 .
+ Aqui tienes un link del hospedaje en cuestion http://localhost/detalleHospedaje.php?id=43 

@@ -28,12 +28,12 @@
 						$fila = mysqli_fetch_assoc($result);
 						if(!empty($fila['premium']))
 						{ 	?>
-							<a class="login_btn"  style="padding: 3px 16px 3px 3px; margin: 15px 0 0 0px;background: #ffbf00;color: #1c3655;">
+							<a class="login_btn" href="verPerfil.php" style="padding: 3px 16px 3px 3px; margin: 15px 0 0 0px;background: #ffbf00;color: #1c3655;">
 							<?php
 						}
 						else
 						{ 	?>
-							<a class="login_btn"  style="padding: 3px 16px 3px 3px; margin: 15px 0 0 0px;background: #ffffff;color: #1c3655;">
+							<a class="login_btn" href="verPerfil.php" style="padding: 3px 16px 3px 3px; margin: 15px 0 0 0px;background: #ffffff;color: #1c3655;">
 							<?php
 						}
 						if(!empty($fila['foto']))
@@ -97,7 +97,7 @@
 							<ul>
 								<li><a href="reportarAceptadas.php">Reportar solicitudes aceptadas</a></li>
 								<li><a href="reportarPremium.php">Reportar usuarios premium</a></li>
-								<li><a href="reportarHospedajes.php">Reportar todos los hospedajes</a></li>
+								<li><a href="reportarHospedajes.php">Reportar todos los couchs</a></li>
 
 							</ul>
 						</li>
@@ -116,13 +116,19 @@
 					}
 					
 					?>
-						<li><a href="buscandoHospedaje.php">Buscar couch</a></li>
+						<li><a href="#">Buscar</a>
+							<ul>
+								<li><a href="buscandoHospedaje.php">Buscar couch</a></li>
+								<li><a href="buscandoUsuario.php">Buscar usuario</a></li>
+							</ul>
+						</li>
 						<li><a href="#">Solicitudes</a>
 							<ul>
 								<li><a href="misSolicitudesEnviadas.php">Enviadas</a></li>
 								<li><a href="misSolicitudesRecibidas.php">Recibidas</a></li>
 							</ul>
 						</li>
+						<li><a href="verUsuariosHospedados.php"> Usuarios Hospedados</a></li>
 						
 					<?php 
 					

@@ -1,7 +1,34 @@
 <?php
 	include("head.php");
 	include("encabezado.php");
+	
 	?>
+	<script type="text/javascript">
+		function confirmarRespuesta(url)
+		{
+			if (!confirm("Seguro que quiere eliminar la respuesta?")) 
+			{
+				return false;
+			}
+			else
+			{
+				document.location = url;
+				return true;
+			}
+		}
+		function confirmarPregunta(url)
+		{
+			if (!confirm("Seguro que quiere eliminar la pregunta?")) 
+			{
+				return false;
+			}
+			else
+			{
+				document.location = url;
+				return true;
+			}
+		}
+	</script>
 	<section class="listings">
 		<div class="wrapper">
 		<br>
@@ -121,6 +148,10 @@
 		</ul>	
 		 </a>
  		</br>
+		
+		
+		
+ 		</br>
 		<?php
 		$link = connection();
 		$id_h = $_GET['id'];
@@ -175,22 +206,162 @@
 		<?php
 		$cont= connection();
 		$id_hospedaje=$_GET['id'];
-		$consulta = "SELECT * from preg_resp where id_hospedaje = $id_hospedaje";
+		if(isset($_SESSION['usuario']))
+		{
+			$cons = "SELECT * from hospedaje h where h.id_hospedaje = $id_hospedaje";
+			if ($resultado = mysqli_query($cont, $cons))
+			{
+				if ($hospedaje = mysqli_fetch_assoc($resultado)) 
+				{
+					$id = $_SESSION['id_usuario'];
+					if($hospedaje['idusuario']!= $id)
+					{
+						
+						?>	<form class="formulariog" action="hacerPregunta.php" method="post" >
+								<input name="id_usuario" value="<?php echo $id; ?>" style="visibility:hidden" />
+								<input name="id_hospedaje" value="<?php echo $id_hospedaje; ?>" style="visibility:hidden" />
+								</br>
+								Escriba aqui su pregunta: <input type="text" name="pregunta" required="true" />
+								<button type="submit" id="listo" name="listo"> Enviar </button>
+								
+							</form>
+							</br>
+							</br>
+							</br>
+							
+						<?php
+					}
+				}
+			}
+		}
+		$consulta = "SELECT * from preg_resp pr inner join usuario u on pr.id_usuario=u.id_usuario where id_hospedaje = $id_hospedaje";
 		if ($resultado = mysqli_query($cont, $consulta))
 		{
 			if(mysqli_num_rows($resultado)>0){
 				?>
-				<div class="columnat">PREGUNTAS</div> <?php
-				while ($fila = mysqli_fetch_row($resultado)) 
-				{ 
-				echo $fila[1];
+				<div class="columnat">PREGUNTAS</div></br> 
+				<ul style="list-style: none;">
+				
+				<?php
+				while ($fila = mysqli_fetch_assoc($resultado)) 
+				{	?> 
+					
+					<li><img src="img/pregunta.png" style="width:22px; height:22px;">
+					<?php echo $fila['pregunta'];
+					if(isset($_SESSION['id_usuario']))
+					{
+						$idu = $_SESSION['id_usuario'];
+						if($fila['id_usuario']==$idu)
+						{
+							?>
+							<a href="javascript:;" onclick="confirmarPregunta('borrarPregunta.php?id=<?php echo $fila['id_preg_resp']; ?>&idh=<?php echo $id_hospedaje; ?>'); return false;"><img src="img/eliminar.gif" style="width:20px; height:20px;"></a>
+							<a onClick=" document.getElementById('modificar_pregunta<?php echo $fila['id_preg_resp'];?>').hidden=false;" href="detalleHospedaje.php?id=<?php echo $_GET['id'] ?>#modificar_pregunta">
+							<img src="img/modificar.png" style="width:20px; height:20px;"></a>
+							<div hidden=true id="modificar_pregunta<?php echo $fila['id_preg_resp'];?>">
+								<form class="formulariog" action="modificarPregunta.php" method="post" >
+									<input name="id_preg_resp" value="<?php echo $fila['id_preg_resp']; ?>" style="visibility:hidden" />
+									<input name="id_hospedaje" value="<?php echo $id_hospedaje; ?>" style="visibility:hidden" />
+									</br>
+									Modifique aqui su pregunta: <input type="text" name="pregunta" required="true" />
+									<button type="submit" id="listo" name="listo"> Enviar </button>
+									<a onClick=" document.getElementById('modificar_pregunta<?php echo $fila['id_preg_resp'];?>').hidden=true;" href="#">
+									<button type="button" name="cancelar" > Cancelar </button></a>
+								</form>
+								</br>
+							</div>
+							
+							
+							<?php
+						}
+					}
+					$mia[0]=false;
+					if(isset($_SESSION['usuario']))
+						{
+							$con= connection();
+							$cons = "SELECT * from hospedaje h where h.id_hospedaje = $id_hospedaje";
+							if ($resul = mysqli_query($con, $cons))
+							{
+								if ($h = mysqli_fetch_assoc($resul)) 
+								{
+									$id = $_SESSION['id_usuario'];
+									if($h['idusuario']== $id)
+									{
+										$mia[0]=true;
+						}}}}
+					
+					
+					
+					if($fila['respuesta']!=NULL)
+					{	?>
+						<ul style="list-style: none;margin-left: 18px;">
+							<li>
+								<img src="img/respuesta.jpg" style="width:22px; height:22px;">
+								<?php echo $fila['respuesta']; 
+								if($mia[0]==true)
+								{
+									?>
+									<a href="javascript:;" onclick="confirmarRespuesta('borrarRespuesta.php?id=<?php echo $fila['id_preg_resp']; ?>&idh=<?php echo $id_hospedaje; ?>'); return false;"><img src="img/eliminar.gif" style="width:20px; height:20px;"></a>
+									<a onClick=" document.getElementById('modificar_respuesta<?php echo $fila['id_preg_resp'];?>').hidden=false;" href="detalleHospedaje.php?id=<?php echo $_GET['id'] ?>#modificar_respuesta">
+										<img src="img/modificar.png" style="width:20px; height:20px;">
+									</a>
+										<div hidden=true id="modificar_respuesta<?php echo $fila['id_preg_resp'];?>">
+											<form class="formulariog" action="modificarRespuesta.php" method="post" >
+												<input name="id_preg_resp" value="<?php echo $fila['id_preg_resp']; ?>" style="visibility:hidden" />
+												<input name="id_hospedaje" value="<?php echo $id_hospedaje; ?>" style="visibility:hidden" />
+												</br>
+												Modifique aqui su respuesta: <input type="text" name="respuesta" required="true" />
+												<button type="submit" id="listo" name="listo"> Enviar </button>
+												<a onClick=" document.getElementById('modificar_respuesta<?php echo $fila['id_preg_resp'];?>').hidden=true;" href="#">
+												<button type="button" name="cancelar" > Cancelar </button></a>
+											</form>
+											</br>
+										</div>
+									
+									
+									
+									<?php
+								}
+								?>
+							</li>
+						</ul>
+						<?php
+					}
+					else if(($fila['respuesta']==NULL)&&($mia[0]==true))
+					{
+						$id_hospedaje=$_GET['id'];
+						?>	
+						<ul style="list-style: none;margin-left: 18px;">
+							<li>
+								<form class="formulariog" action="responderPregunta.php" method="post" >
+									<input name="id_hospedaje" value="<?php echo $id_hospedaje; ?>" style="visibility:hidden" />
+									<input name="id_preg_resp" value="<?php echo $fila['id_preg_resp']; ?>" style="visibility:hidden" />
+									</br>
+									Escriba aqui su respuesta: <input type="text" name="respuesta" required="true" />
+									<button type="submit" id="listo" name="listo"> Responder </button>
+								</form>
+								</br>
+							</li>
+						</ul>
+						<?php
+					}
+					else
+					{
+						
+					}
+					?>
+					</li> 
+					<li> ------------------------------------ </li>
+					<?php
 				}
+				?>
+				</ul>
+				<?php
 			}
 		}
 		
 		?>
 		
-		</div></br></br></br>
+		</br></br></br>
 		<div hidden=true id="titulo_comentario" class="columnat">COMENTARIOS</div>
 		<div hidden=true id="contenido_comentario">
 		<?php

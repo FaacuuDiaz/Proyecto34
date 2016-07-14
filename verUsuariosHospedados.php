@@ -4,7 +4,7 @@
 	$csa->ComprobarSesion();
 	
 ?>
- 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,53 +39,59 @@
 </head>
 <body>
 
- <?php
- //include("head.php"); 
- include("encabezado.php");
-
-	include_once("connection.php");
-	$con=connection();
-	$id_u=$_SESSION['id_usuario'];
-	$consul="SELECT u.id_usuario, h.id_hospedaje, h.titulo,s.fecha_entrada,s.fecha_salida FROM hospedaje h INNER JOIN solicitudes s ON h.id_hospedaje=s.id_hospedaje INNER JOIN usuario u ON u.id_usuario=s.id_usuario WHERE s.estado='aceptada' and u.id_usuario=$id_u";
-	$resul=mysqli_query($con,$consul);
-	?>
-	
-		<section class="div_listado">
+	<?php include("encabezado.php") ?>
+	<section class="div_listado">
 		<div class="wrapper">
-		<div class="columnat">COUCH DONDE ME QUEDE</div>
+		<div class="columnat">USUARIOS QUE SE HOSPEDARON</div>
 		</br>
-			<table><tr class="titulos">
-				<td><strong>Nombre de Couch</strong></td>
-				<td><strong>Periodo de estadia</strong></td>
-				<td><strong>Comentario</strong></td>
-				 <td><strong>Borrar</strong></td>
+			<table>
+				<tr class="titulos">
+				  <td><strong>Couch</strong></td>
+				  <td><strong>Usuario</strong></td>
+				  <td><strong>Fecha Estadia</strong></td>
+				  <td><strong>Comentario</strong></td>
+				  <td><strong>Borrar</strong></td>
 				  <td><strong>Editar</strong></td>
-				</tr>
-			<?php
-			if($resul){
-				while($fila=mysqli_fetch_array($resul)){
-				?>
-				<tr>
-				<td><?php echo $fila['titulo']?></td>
-				<td><?php echo $fila['fecha_entrada']." a ".$fila['fecha_salida'] ?></td>
-				<?php 
-					$idH = $fila['id_hospedaje'];
+				  </tr>
+ 			<?php 
+				include_once ('connection.php');
+				$cont= connection();
+				$usuario=$_SESSION['id_usuario'];
+				$consulta = "SELECT * from solicitudes s inner join hospedaje h on s.id_hospedaje=h.id_hospedaje 
+														 inner join usuario u on s.id_usuario=u.id_usuario
+							WHERE s.estado='aceptada' and s.id_hospedaje IN (SELECT id_hospedaje
+													 from hospedaje
+													 where idusuario='$usuario')";
+				if ($resultado = mysqli_query($cont, $consulta))
+					{
+						while ($fila = mysqli_fetch_assoc($resultado)) 
+						{ ?>
+							<tr>
+								<td><?php echo $fila['titulo']; ?></td>
+								<?php 
+									$id = $fila['id_hospedaje'];
+									$estado= $fila['estado'];
+								?>
+								<td><?php echo $fila['nombre']." ".$fila['apellido'];?></td>
+								<td><?php echo $fila['fecha_entrada']." a ".$fila['fecha_salida']?></td>
+								<td>
+								<?php 
+					//$idH = $fila['id_hospedaje'];
+					$con=connection();
 					$idU = $fila['id_usuario'];
 					$consultaAux = 
-					"SELECT * from comentario c inner join hospedaje_comentario hc ON hc.id_comentario=c.id_comentario WHERE hc.id_hospedaje=$idH and c.id_usuario=$idU";
+					"SELECT * from comentario c inner join usuario_comentario uc ON uc.id_comentario=c.id_comentario WHERE uc.id_usuario=$idU";
 					$result2 = mysqli_query($con,$consultaAux);
-					?>
-				<td>
-					<?php 
 						if(mysqli_num_rows($result2)<1){  
 							if($fila['fecha_salida'] < date("Y-m-d"))
 							{	?>
-								<a href="formulario.php?var=7&id_h=<?php echo $fila['id_hospedaje']?> " >Comentar</a>
+						
+								<a href="hacerComentario.php?id_u=<?php echo $idU; ?> " >Comentar</a> 
 								</td>
 								<td>
 								</td>
 								<td>
-								</td>								
+								</td>
 								<?php
 							}
 							else
@@ -111,26 +117,32 @@
 							?>
 							</td>
 								<td style="width:100px; padding:1%;">
-									<a href="javascript:;" onclick="confirmar('borrarComentarioHospedaje.php?id=<?php echo $fila['id_hospedaje_comentario']; ?>'); return false;"><img src="img/borrar.png" style="width:100px; height:32px;"></a>
+									<a href="javascript:;" onclick="confirmar('borrarComentarioUsuario.php?id=<?php echo $fila['id_usuario_comentario']; ?>'); return false;"><img src="img/borrar.png" style="width:100px; height:32px;"></a>
 								</td>
 								<td style="width:100px; padding:1%;">
-									<a href="modificarComentarioHospedaje.php?id=<?php echo $fila['id_comentario']; ?>"><img src="img/editar.png" style="width:100px; height:32px;"></a>
+									<a href="modificarComentarioUsuario.php?id=<?php echo $fila['id_comentario']; ?>"><img src="img/editar.png" style="width:100px; height:32px;"></a>
 								</td>
 							<?php
 
 						 }
 
 					?>
-				</td>
-				</tr>
-				<?php
-				}
-			}
-		?>
-
+				
+								
+							</tr>
+						<?php	
+						}
+					}
+				//mysqli_free_result($resultado);
+			?>
+			
+			
 			</table>
+				
 		</div>
-	</section>
+	</section>	<!--  end listing section  -->
+
 	<?php include("footer.php") ?>
+	
 </body>
 </html>

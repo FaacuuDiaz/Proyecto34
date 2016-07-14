@@ -7,7 +7,7 @@
 		$con=connection();
 		$consul="SELECT * from hospedaje h  INNER JOIN usuario u ON h.idusuario=u.id_usuario ";
 		$resul=mysqli_query($con,$consul); ?>
-	<div class="columnat">Hospedajes</div>
+	<div class="columnat">COUCHS</div>
 		</br>
 		<table>
 			<tr class="titulos">
@@ -19,7 +19,7 @@
 			<tr>
 				<td><?php echo $fila['titulo']; ?></td>
 				<td><?php echo $fila['nick']; ?></td>
-				<td><a href="detalleHospedaje.php?id=<?php echo $fila['id_hospedaje'];?>" > Ver detalles del hospedaje </a></td>
+				<td><a href="detalleHospedaje.php?id=<?php echo $fila['id_hospedaje'];?>" > Ver detalles del Couch </a></td>
 
 
 			</tr>   

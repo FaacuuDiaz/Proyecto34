@@ -22,7 +22,6 @@ ul#menu li:hover{
 ul#menu ul {
  display: none;
  position: absolute;
- top: 49px;
  background: #96ac3c;
  color: #fff;
  padding: 5px 0px 5px 5px;
@@ -54,4 +53,9 @@ ul#menu li:hover ul ul,ul#menu li:hover ul ul ul,ul#menu li.iehover ul ul,ul#men
 ul#menu li:hover ul,ul#menu ul li:hover ul,ul#menu ul ul li:hover ul,ul#menu li.iehover ul,ul#menu ul li.iehover ul,ul#menu ul ul li.iehover ul {
  display: block;
  cursor:pointer;
+}
+ul#menu li ul 
+{
+	width:28%;
+	z-index:98;
 }
